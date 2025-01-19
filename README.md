@@ -21,3 +21,7 @@ It will upload them to a server after certain amount of time and continue to kee
 ```bash
 python main.py 
  ```
+3.**Every picture that will go in camera images it will be uploaded after 30seconds**:
+```bash
+Move you pictures there manually or configure your camera to save your pictures in camera_images
+```
