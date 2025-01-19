@@ -9,8 +9,8 @@ class ImageUploader:
         self.watch_folder = watch_folder
         self.upload_folder = upload_folder
         self.upload_url = upload_url
-
-        # Create the upload folder if it doesn't exist
+        os.makedirs(self.upload_folder, exist_ok=True)
+        os.makedirs(self.watch_folder, exist_ok=True)
         os.makedirs(self.upload_folder, exist_ok=True)
 
     def monitor_and_upload(self):
@@ -22,7 +22,7 @@ class ImageUploader:
                 image_path = os.path.join(self.watch_folder, image)
                 if self.upload_image(image_path):
                     self.move_image(image)
-            time.sleep(30)  # Wait 30 seconds between uploads
+            time.sleep(30) 
 
     def get_images(self):
         """Gets a list of images in the watch folder."""
@@ -58,11 +58,9 @@ class ImageUploader:
 
 
 if __name__ == "__main__":
-    # Configuration
-    WATCH_FOLDER = "./camera_images"  # Folder where camera saves pictures
-    UPLOAD_FOLDER = "./uploaded"      # Folder to move uploaded pictures
+    WATCH_FOLDER = "./camera_images" 
+    UPLOAD_FOLDER = "./uploaded"    
     UPLOAD_URL = "https://projects.benax.rw/f/o/r/e/a/c/h/p/r/o/j/e/c/t/s/4e8d42b606f70fa9d39741a93ed0356c/iot_testing_202501/upload.php"
 
-    # Create and run the uploader
     uploader = ImageUploader(WATCH_FOLDER, UPLOAD_FOLDER, UPLOAD_URL)
     uploader.monitor_and_upload()
